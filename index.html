@@ -1,1 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Live Panel</title>
 
+<style>
+body{
+    margin:0;
+    background:black;
+    font-family:Arial;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.guest{
+    width:170px;
+    background:#111;
+    padding:12px;
+    border-radius:15px;
+    position:relative;
+    text-align:center;
+}
+
+.guest img{
+    width:95px;
+    height:95px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.coins{
+    position:absolute;
+    top:8px;
+    right:8px;
+    background:black;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="guest">
+    <div class="coins" id="coins">0 🪙</div>
+    <img id="guestImage" src="">
+    <div id="guestName">Guest</div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+document.getElementById("guestName").innerText = params.get("name") || "Guest";
+document.getElementById("coins").innerText = (params.get("coins") || "0") + " 🪙";
+document.getElementById("guestImage").src = params.get("img") || "";
+</script>
+
+</body>
+</html>
