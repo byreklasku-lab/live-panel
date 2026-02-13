@@ -7,27 +7,60 @@
 <style>
 body{
     margin:0;
-    background:black;
+    background:#000;
     font-family:Arial;
     color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
 }
 
-.guest{
-    width:170px;
+.container{
+    display:flex;
+    padding:20px;
+}
+
+/* HOST */
+.host{
+    width:320px;
+    height:500px;
     background:#111;
-    padding:12px;
+    border-radius:20px;
+    position:relative;
+    margin-right:20px;
+    overflow:hidden;
+}
+
+.host img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.host-name{
+    position:absolute;
+    bottom:10px;
+    left:15px;
+    font-size:18px;
+}
+
+/* RIGHT SIDE */
+.right{
+    display:flex;
+    flex-direction:column;
+}
+
+/* ACTIVE GUEST */
+.active-guest{
+    width:180px;
+    background:#1a1a1a;
     border-radius:15px;
+    padding:15px;
     position:relative;
     text-align:center;
+    margin-bottom:20px;
 }
 
-.guest img{
-    width:95px;
-    height:95px;
+.active-guest img{
+    width:90px;
+    height:90px;
     border-radius:50%;
     object-fit:cover;
 }
@@ -36,28 +69,74 @@ body{
     position:absolute;
     top:8px;
     right:8px;
-    background:black;
+    background:#000;
     padding:4px 10px;
     border-radius:20px;
-    font-size:14px;
+    font-size:13px;
+}
+
+/* INVITE GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,180px);
+    gap:15px;
+}
+
+.invite{
+    background:#111;
+    height:120px;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    color:#777;
+    font-size:16px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="guest">
-    <div class="coins" id="coins">0 🪙</div>
-    <img id="guestImage" src="">
-    <div id="guestName">Guest</div>
+<div class="container">
+
+    <!-- HOST -->
+    <div class="host">
+        <img id="hostImg" src="">
+        <div class="host-name" id="hostName">Host</div>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right">
+
+        <div class="active-guest">
+            <div class="coins" id="coins">0 💎</div>
+            <img id="guestImg" src="">
+            <div id="guestName">Guest</div>
+        </div>
+
+        <div class="grid">
+            <div class="invite">+ Invite</div>
+            <div class="invite">+ Invite</div>
+            <div class="invite">+ Invite</div>
+            <div class="invite">+ Invite</div>
+            <div class="invite">+ Invite</div>
+            <div class="invite">+ Invite</div>
+        </div>
+
+    </div>
+
 </div>
 
 <script>
 const params = new URLSearchParams(window.location.search);
 
-document.getElementById("guestName").innerText = params.get("name") || "Guest";
-document.getElementById("coins").innerText = (params.get("coins") || "0") + " 🪙";
-document.getElementById("guestImage").src = params.get("img") || "";
+document.getElementById("hostName").innerText = params.get("host") || "Host";
+document.getElementById("guestName").innerText = params.get("guest") || "Guest";
+document.getElementById("coins").innerText = (params.get("coins") || "0") + " 💎";
+
+document.getElementById("hostImg").src = params.get("hostimg") || "";
+document.getElementById("guestImg").src = params.get("guestimg") || "";
 </script>
 
 </body>
